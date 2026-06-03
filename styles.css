@@ -577,6 +577,7 @@ ul {
     border-radius: 8px;
     color: var(--color-text);
     font-family: var(--font-body);
+    font-size: 16px; /* Prevents auto-zoom on mobile (iOS) */
     transition: var(--transition);
 }
 
