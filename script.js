@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar Lucide Icons
-    lucide.createIcons();
+    // Inicializar Lucide Icons de forma assíncrona para não bloquear a renderização principal (melhora drástica no TBT)
+    setTimeout(() => {
+        lucide.createIcons();
+    }, 50);
 
     // Navbar Scroll Effect
     const navbar = document.querySelector('.navbar');
