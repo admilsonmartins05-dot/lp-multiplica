@@ -14,8 +14,11 @@
     <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
     
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Preload LCP Image -->
+    <link rel="preload" href="foto-perfil.webp" as="image">
+    
+    <!-- Lucide Icons (Deferred para não bloquear a renderização) -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body>
 
@@ -28,7 +31,7 @@
     <nav class="navbar">
         <div class="container nav-container">
             <div class="logo">
-                <img src="logo.png" alt="Multiplica Leads" class="logo-image">
+                <img src="logo.png" alt="Multiplica Leads" class="logo-image" width="146" height="60" fetchpriority="high">
             </div>
             <a href="#diagnostico" class="btn btn-outline nav-cta">Sessão Estratégica</a>
         </div>
@@ -59,7 +62,7 @@
                 </div>
             </div>
             <div class="hero-image-wrapper">
-                <img src="foto-perfil.png" alt="Especialista Multiplica" class="hero-image">
+                <img src="foto-perfil.webp" alt="Especialista Multiplica" class="hero-image" width="329" height="411" fetchpriority="high">
             </div>
         </div>
     </section>
