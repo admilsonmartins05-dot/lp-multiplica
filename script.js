@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // Form submission prevention (apenas visual por enquanto)
+    // Form submission
     const form = document.getElementById('capture-form');
     if(form) {
         form.addEventListener('submit', (e) => {
@@ -46,20 +46,30 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.innerHTML = '<i data-lucide="loader-2" class="spin"></i> Enviando...';
             lucide.createIcons();
             
-            // Simular envio
-            setTimeout(() => {
-                btn.innerHTML = '<i data-lucide="check"></i> Solicitação Enviada!';
-                btn.style.backgroundColor = 'var(--color-success)';
-                btn.style.boxShadow = '0 4px 20px rgba(16, 185, 129, 0.3)';
-                lucide.createIcons();
-                form.reset();
-                
-                setTimeout(() => {
+            // URL do Web App do Google Apps Script
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwB10UdKQdT9CYdFFyuNFiypJhbXgiiMmh3QXLDfR2EoQ7l9g6u5heDTE-IW2wOsT0/exec';
+
+            const formData = new FormData(form);
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => {
+                    btn.innerHTML = '<i data-lucide="check"></i> Solicitação Enviada!';
+                    btn.style.backgroundColor = 'var(--color-success)';
+                    btn.style.boxShadow = '0 4px 20px rgba(16, 185, 129, 0.3)';
+                    lucide.createIcons();
+                    form.reset();
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.style.backgroundColor = '';
+                        btn.style.boxShadow = '';
+                    }, 3000);
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert('Houve um problema ao enviar seus dados. Tente novamente.');
                     btn.innerHTML = originalText;
-                    btn.style.backgroundColor = '';
-                    btn.style.boxShadow = '';
-                }, 3000);
-            }, 1500);
+                });
         });
     }
 });
