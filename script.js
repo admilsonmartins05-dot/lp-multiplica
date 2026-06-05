@@ -50,8 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const scriptURL = 'https://script.google.com/macros/s/AKfycbwB10UdKQdT9CYdFFyuNFiypJhbXgiiMmh3QXLDfR2EoQ7l9g6u5heDTE-IW2wOsT0/exec';
 
             const formData = new FormData(form);
+            const data = new URLSearchParams();
+            for (const pair of formData) {
+                data.append(pair[0], pair[1]);
+            }
 
-            fetch(scriptURL, { method: 'POST', body: formData })
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: data,
+                mode: 'no-cors'
+            })
                 .then(response => {
                     btn.innerHTML = '<i data-lucide="check"></i> Solicitação Enviada!';
                     btn.style.backgroundColor = 'var(--color-success)';
